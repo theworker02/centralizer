@@ -1,24 +1,26 @@
 <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 1280 640" width="1280" height="640" role="img" aria-label="Centralizer">
   <rect width="1280" height="640" fill="#16181c"/>
-  <g transform="translate(88 168) scale(1.1875)">
+  <g transform="translate(96 172) scale(1.15625)">
     <rect width="256" height="256" rx="44" fill="#1b1d21"/>
-    <path d="M166 62.18 L90 62.18 L52 128 L90 193.82 L166 193.82" fill="none" stroke="#f4efe6" stroke-width="11" stroke-linecap="round" stroke-linejoin="round"/>
-    <g fill="none" stroke="#c9844a" stroke-width="6.5" stroke-linecap="round">
-      <path d="M90 62.18 L128 128"/>
-      <path d="M52 128 L128 128"/>
-      <path d="M90 193.82 L128 128"/>
+    <g fill="none" stroke="#f4efe6" stroke-width="10" stroke-linecap="round" stroke-linejoin="round">
+      <path d="M168 58.72 L88 58.72 L48 128 L88 197.28 L168 197.28"/>
     </g>
-    <path d="M150 128 H204" fill="none" stroke="#c9844a" stroke-width="11" stroke-linecap="round"/>
-    <circle cx="166" cy="62.18" r="8.5" fill="#f4efe6"/>
-    <circle cx="90" cy="62.18" r="8.5" fill="#f4efe6"/>
-    <circle cx="52" cy="128" r="8.5" fill="#f4efe6"/>
-    <circle cx="90" cy="193.82" r="8.5" fill="#f4efe6"/>
-    <circle cx="166" cy="193.82" r="8.5" fill="#f4efe6"/>
-    <circle cx="204" cy="128" r="8.5" fill="#c9844a"/>
-    <circle cx="128" cy="128" r="22" fill="#c9844a"/>
-    <circle cx="128" cy="128" r="8" fill="#f4efe6"/>
+    <g fill="none" stroke="#c9844a" stroke-width="10" stroke-linecap="round">
+      <path d="M88 58.72 L128 128"/>
+      <path d="M48 128 H208"/>
+      <path d="M88 197.28 L128 128"/>
+    </g>
+    <circle cx="168" cy="58.72" r="8" fill="#f4efe6"/>
+    <circle cx="88" cy="58.72" r="8" fill="#f4efe6"/>
+    <circle cx="48" cy="128" r="8" fill="#f4efe6"/>
+    <circle cx="88" cy="197.28" r="8" fill="#f4efe6"/>
+    <circle cx="168" cy="197.28" r="8" fill="#f4efe6"/>
+    <circle cx="208" cy="128" r="8" fill="#c9844a"/>
+    <circle cx="128" cy="128" r="21" fill="#c9844a"/>
+    <circle cx="128" cy="128" r="7.5" fill="#f4efe6"/>
   </g>
-  <text x="448" y="268" fill="#f4efe6" font-family="Palatino Linotype, Palatino, Georgia, Times New Roman, serif" font-size="58" font-weight="500" letter-spacing="10">CENTRALIZER</text>
-  <text x="448" y="328" fill="#c9844a" font-family="Palatino Linotype, Palatino, Georgia, Times New Roman, serif" font-size="30">One runtime. Every language.</text>
-  <text x="448" y="382" fill="#9a9488" font-family="Palatino Linotype, Palatino, Georgia, Times New Roman, serif" font-size="20">Autonomous polyglot interoperability, written in Go.</text>
+  <text x="456" y="262" fill="#f4efe6" font-family="Palatino Linotype, Palatino, Georgia, Times New Roman, serif" font-size="56" font-weight="500" letter-spacing="8">CENTRALIZER</text>
+  <rect x="456" y="286" width="72" height="2" fill="#c9844a"/>
+  <text x="456" y="336" fill="#c9844a" font-family="Palatino Linotype, Palatino, Georgia, Times New Roman, serif" font-size="28">One runtime. Every language.</text>
+  <text x="456" y="384" fill="#9a9488" font-family="Palatino Linotype, Palatino, Georgia, Times New Roman, serif" font-size="20">Autonomous polyglot interoperability, written in Go.</text>
 </svg>

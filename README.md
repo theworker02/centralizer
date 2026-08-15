@@ -636,11 +636,12 @@ The site copies `assets/logo.svg` and `assets/icon.svg` into `website/public` at
 
 | File | Use |
 | --- | --- |
-| `assets/logo.svg` | Canonical mark (hub + converging paths / copper node) |
+| `assets/logo.svg` | Canonical mark (hexagonal C, copper hub, unified exit) |
 | `assets/logo-dark.svg` | Dark-background variant |
 | `assets/logo-light.svg` | Light-background variant |
 | `assets/icon.svg` | Compact icon / favicon |
 | `assets/icon-256.png`, `assets/icon-512.png` | Raster icons |
+| `assets/github-social-preview.svg` | Vector source for the social preview |
 | `assets/github-social-preview.png` | GitHub social preview (1280×640) |
 
 README, the documentation site, and `@theworker02/centralizer-brand` all use these files. Do not introduce a one-off drawing. Upload `assets/github-social-preview.png` in repository settings for the social preview. See [docs/github-metadata.md](docs/github-metadata.md).

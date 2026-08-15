@@ -7,7 +7,7 @@
 
 Official Centralizer brand assets. The marks in this package are copies of the repository `assets/` directory, which is the single source of truth.
 
-This package is not a JavaScript runtime and does not implement Centralizer Protocol. It exists so sites, READMEs, and npm consumers use the same hub + converging paths / copper node — not a one-off drawing.
+This package is not a JavaScript runtime and does not implement Centralizer Protocol. It exists so sites, READMEs, and npm consumers use the same hexagonal C / copper hub — not a one-off drawing.
 
 ## Files
 

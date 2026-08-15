@@ -4,6 +4,10 @@ All notable changes are documented here. The format follows [Keep a Changelog](h
 
 ## [Unreleased]
 
+### Changed
+
+- Official mark is a hand-drawn hexagonal C: off-white structure, copper hub, three inbound radii, one unified exit (`assets/`, `@theworker02/centralizer-brand`, website)
+
 ## [0.1.1] - 2026-08-15
 
 ### Added
