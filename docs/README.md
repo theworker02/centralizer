@@ -13,6 +13,7 @@ Canonical documents live at the repository root so GitHub renders them immediate
 | [BENCHMARKS.md](../BENCHMARKS.md) | Measurement rules |
 | [ROADMAP.md](../ROADMAP.md) | Phases |
 | [SECURITY.md](../SECURITY.md) | Trust model and reporting |
+| [PRIVACY.md](../PRIVACY.md) | What is and is not collected |
 
 The documentation website sources are in [`website/`](../website/). Published site: <https://theworker02.github.io/centralizer/>.
 

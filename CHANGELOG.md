@@ -4,9 +4,23 @@ All notable changes are documented here. The format follows [Keep a Changelog](h
 
 ## [Unreleased]
 
+## [0.1.2] - 2026-08-15
+
+### Added
+
+- [PRIVACY.md](PRIVACY.md): local-only policy (no accounts, no author telemetry, localhost daemon, third-party GitHub / pkg.go.dev / proxy.golang.org)
+- Privacy page on the documentation site (`#privacy`) and links from README and SECURITY.md
+- README sections: what Centralizer is not, module identity, repository layout, planner weights, errors, cache paths, versioning / pkg.go.dev, testing, document index
+
 ### Changed
 
-- Official mark is a hand-drawn hexagonal C: off-white structure, copper hub, three inbound radii, one unified exit (`assets/`, `@theworker02/centralizer-brand`, website)
+- Version identity is `0.1.2` (`internal/version`, `Makefile`)
+- README expanded with install pinning, CLI walk, adapter tiers, and release process
+- Brand mark and social preview in `assets/` (canonical source for README, website, and `@theworker02/centralizer-brand`)
+
+### Security
+
+- No change to the trust model. Privacy documentation clarifies that connecting a target runs that code locally.
 
 ## [0.1.1] - 2026-08-15
 

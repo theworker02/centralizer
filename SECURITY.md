@@ -45,3 +45,7 @@ Out of scope:
 ## Supported versions
 
 Security fixes target the latest `0.x` release until 1.0. The public API and protocol are not stable before 1.0.
+
+## Privacy
+
+Centralizer is a local library and CLI. It does not require accounts and does not ship analytics or telemetry to the authors by default. Doctor output and the cache stay on the machine. Optional `centralizerd` binds loopback only. See [PRIVACY.md](PRIVACY.md).

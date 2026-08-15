@@ -1,6 +1,6 @@
 GO ?= go
 BIN := bin
-VERSION := 0.1.1
+VERSION := 0.1.2
 LDFLAGS := -X github.com/theworker02/centralizer/internal/version.Version=$(VERSION)
 
 .PHONY: build test race lint fuzz bench docs website brand release-snapshot clean fmt vet

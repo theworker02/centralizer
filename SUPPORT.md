@@ -3,6 +3,7 @@
 - Issues: bugs, adapter requests, and documentation defects
 - Discussions: design questions and usage
 - Security: [SECURITY.md](SECURITY.md) only — do not file public issues for unpatched vulnerabilities
+- Privacy: [PRIVACY.md](PRIVACY.md) — local library/CLI; no accounts or author telemetry
 
 v0.1 is pre-1.0. The API and protocol may change. Pin a module version in `go.mod`.
 

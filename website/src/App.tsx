@@ -14,6 +14,7 @@ const pages = [
   "benchmarks",
   "roadmap",
   "changelog",
+  "privacy",
 ] as const;
 
 type Page = (typeof pages)[number];
@@ -32,6 +33,7 @@ const labels: Record<Page, string> = {
   benchmarks: "Benchmarks",
   roadmap: "Roadmap",
   changelog: "Changelog",
+  privacy: "Privacy",
 };
 
 export function App() {
@@ -67,6 +69,7 @@ export function App() {
           <a href="https://pkg.go.dev/github.com/theworker02/centralizer/pkg/centralizer">
             Go API
           </a>
+          <a href="#privacy">Privacy</a>
         </div>
       </nav>
       <main>{render(page)}</main>
@@ -107,6 +110,8 @@ function render(page: Page) {
       return <Roadmap />;
     case "changelog":
       return <Changelog />;
+    case "privacy":
+      return <Privacy />;
   }
 }
 
@@ -114,7 +119,7 @@ function Overview() {
   return (
     <>
       <img className="hero-mark" src="./logo.svg" alt="Centralizer" />
-      <div className="kicker">Interop runtime · v0.1.1</div>
+      <div className="kicker">Interop runtime · v0.1.2</div>
       <h1>CENTRALIZER</h1>
       <p className="tag">One runtime. Every language.</p>
       <p>
@@ -525,6 +530,14 @@ function Security() {
         binds loopback only. Handles never store foreign memory pointers.
         Report vulnerabilities privately via GitHub Security Advisories.
       </p>
+      <p>
+        Centralizer does not require accounts and does not ship analytics to
+        the authors. See <a href="#privacy">Privacy</a> and{" "}
+        <a href="https://github.com/theworker02/centralizer/blob/main/PRIVACY.md">
+          PRIVACY.md
+        </a>
+        .
+      </p>
     </>
   );
 }
@@ -561,10 +574,56 @@ function Roadmap() {
   );
 }
 
+function Privacy() {
+  return (
+    <>
+      <h2>Privacy</h2>
+      <p>
+        Centralizer is a local library and CLI. It does not require an
+        account. There is no Centralizer cloud and no sign-in.
+      </p>
+      <ul>
+        <li>
+          No analytics or telemetry is shipped to the authors by default.
+        </li>
+        <li>
+          Optional <code>centralizerd</code> binds loopback only.
+        </li>
+        <li>Doctor reports and the cache stay on this machine.</li>
+        <li>
+          Connecting a target runs that code locally. You are responsible for
+          it.
+        </li>
+        <li>
+          GitHub, pkg.go.dev, and proxy.golang.org are third parties if you
+          use those services.
+        </li>
+      </ul>
+      <p>
+        Full text:{" "}
+        <a href="https://github.com/theworker02/centralizer/blob/main/PRIVACY.md">
+          PRIVACY.md
+        </a>
+        . Security reports go through{" "}
+        <a href="https://github.com/theworker02/centralizer/security/advisories">
+          GitHub Security Advisories
+        </a>
+        , not public issues.
+      </p>
+    </>
+  );
+}
+
 function Changelog() {
   return (
     <>
       <h2>Changelog</h2>
+      <h3>0.1.2</h3>
+      <ul>
+        <li>Privacy policy (PRIVACY.md) and site privacy page</li>
+        <li>Expanded README: module identity, errors, cache, versioning</li>
+        <li>Tagged module for pkg.go.dev / proxy.golang.org</li>
+      </ul>
       <h3>0.1.1</h3>
       <ul>
         <li>Official brand package and assets/ as the single logo source</li>

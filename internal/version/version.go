@@ -3,7 +3,7 @@ package version
 
 // Version is the SemVer identifier for this build. Release automation
 // may overwrite this via -ldflags.
-const Version = "0.1.1"
+const Version = "0.1.2"
 
 // Protocol is the Centralizer Protocol major.minor spoken by this build.
 const Protocol = "1.0"
