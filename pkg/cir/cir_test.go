@@ -114,7 +114,7 @@ func TestValidate(t *testing.T) {
 	if err != nil {
 		t.Fatal(err)
 	}
-	if err := Validate(v, typ); err != nil {
+	if err = Validate(v, typ); err != nil {
 		t.Fatal(err)
 	}
 	bad, err := Struct("", []string{"name"}, []Value{Int(1)})

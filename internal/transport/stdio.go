@@ -26,8 +26,27 @@ type Stdio struct {
 	cmd    *exec.Cmd
 	stdin  io.WriteCloser
 	stdout *bufio.Reader
-	stderr bytes.Buffer
+	stderr lockedBuffer
 	done   chan error
+}
+
+// lockedBuffer is a bytes.Buffer that is safe for concurrent Write and String.
+// os/exec copies child stderr onto Write from another goroutine.
+type lockedBuffer struct {
+	mu sync.Mutex
+	b  bytes.Buffer
+}
+
+func (l *lockedBuffer) Write(p []byte) (int, error) {
+	l.mu.Lock()
+	defer l.mu.Unlock()
+	return l.b.Write(p)
+}
+
+func (l *lockedBuffer) String() string {
+	l.mu.Lock()
+	defer l.mu.Unlock()
+	return l.b.String()
 }
 
 func (s *Stdio) Kind() Kind { return KindStdio }

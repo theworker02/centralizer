@@ -223,9 +223,9 @@ func policyTransport(in Input, name string) (bool, string) {
 	return true, ""
 }
 
-func preferBoost(prefer []string, strat bridge.Strategy, transport string) int {
+func preferBoost(prefer []string, strategy bridge.Strategy, transport string) int {
 	for i, p := range prefer {
-		if strings.EqualFold(p, string(strat)) || strings.EqualFold(p, transport) {
+		if strings.EqualFold(p, string(strategy)) || strings.EqualFold(p, transport) {
 			return 8 - i
 		}
 	}

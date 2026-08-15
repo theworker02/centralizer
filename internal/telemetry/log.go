@@ -67,7 +67,6 @@ type Span struct {
 	Attrs    map[string]any `json:"attrs,omitempty"`
 	Children []*Span        `json:"children,omitempty"`
 	Err      string         `json:"error,omitempty"`
-	mu       sync.Mutex
 }
 
 // Tracer records a tree of spans for explain/trace commands.

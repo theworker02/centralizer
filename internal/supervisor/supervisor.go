@@ -3,6 +3,7 @@ package supervisor
 
 import (
 	"context"
+	"errors"
 	"sync"
 	"time"
 
@@ -343,9 +344,5 @@ func recoverable(err error) bool {
 }
 
 func is(err, target error) bool {
-	type iser interface{ Is(error) bool }
-	if u, ok := err.(iser); ok {
-		return u.Is(target)
-	}
-	return err == target
+	return errors.Is(err, target)
 }

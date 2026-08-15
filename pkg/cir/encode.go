@@ -183,9 +183,9 @@ func FromWire(w Wire) (Value, error) {
 	case KindArray:
 		items := make([]Value, len(w.A))
 		for i, item := range w.A {
-			cv, err := FromWire(item)
-			if err != nil {
-				return Value{}, err
+			cv, convErr := FromWire(item)
+			if convErr != nil {
+				return Value{}, convErr
 			}
 			items[i] = cv
 		}
@@ -193,9 +193,9 @@ func FromWire(w Wire) (Value, error) {
 	case KindTuple:
 		items := make([]Value, len(w.A))
 		for i, item := range w.A {
-			cv, err := FromWire(item)
-			if err != nil {
-				return Value{}, err
+			cv, convErr := FromWire(item)
+			if convErr != nil {
+				return Value{}, convErr
 			}
 			items[i] = cv
 		}
@@ -204,9 +204,9 @@ func FromWire(w Wire) (Value, error) {
 		keys := make([]string, len(w.M))
 		vals := make([]Value, len(w.M))
 		for i, e := range w.M {
-			cv, err := FromWire(e.Val)
-			if err != nil {
-				return Value{}, err
+			cv, convErr := FromWire(e.Val)
+			if convErr != nil {
+				return Value{}, convErr
 			}
 			keys[i] = e.Key
 			vals[i] = cv
@@ -248,9 +248,9 @@ func FromWire(w Wire) (Value, error) {
 		v = Union(tag, inner)
 	case KindOptional:
 		if w.P != nil && *w.P && len(w.A) > 0 {
-			inner, err := FromWire(w.A[0])
-			if err != nil {
-				return Value{}, err
+			inner, convErr := FromWire(w.A[0])
+			if convErr != nil {
+				return Value{}, convErr
 			}
 			v = Optional(inner)
 		} else {

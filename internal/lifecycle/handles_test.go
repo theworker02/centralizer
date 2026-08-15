@@ -1,6 +1,7 @@
 package lifecycle
 
 import (
+	"errors"
 	"testing"
 	"time"
 
@@ -40,5 +41,5 @@ func TestExpireAndDropBridge(t *testing.T) {
 }
 
 func isHandle(err error) bool {
-	return err != nil && (err == czerr.ErrHandleInvalid || czerr.ErrHandleInvalid.Error() != "")
+	return errors.Is(err, czerr.ErrHandleInvalid)
 }

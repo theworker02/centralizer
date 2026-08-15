@@ -18,8 +18,8 @@ func TestMemoryPair(t *testing.T) {
 	if err := b.Open(ctx); err != nil {
 		t.Fatal(err)
 	}
-	defer a.Close()
-	defer b.Close()
+	defer func() { _ = a.Close() }()
+	defer func() { _ = b.Close() }()
 
 	m, err := protocol.NewMessage("1", protocol.TypeHeartbeat, nil)
 	if err != nil {
@@ -53,7 +53,7 @@ func TestTCPLoopbackRoundTrip(t *testing.T) {
 	if err != nil {
 		t.Fatal(err)
 	}
-	defer ln.Close()
+	defer func() { _ = ln.Close() }()
 	addr := ln.Addr().String()
 
 	ctx, cancel := context.WithTimeout(context.Background(), 3*time.Second)
@@ -61,15 +61,15 @@ func TestTCPLoopbackRoundTrip(t *testing.T) {
 
 	errCh := make(chan error, 2)
 	go func() {
-		c, err := AcceptOne(ctx, ln)
-		if err != nil {
-			errCh <- err
+		c, acceptErr := AcceptOne(ctx, ln)
+		if acceptErr != nil {
+			errCh <- acceptErr
 			return
 		}
 		srv := NewConn(c, KindTCP)
-		msg, err := srv.Receive(ctx)
-		if err != nil {
-			errCh <- err
+		msg, recvErr := srv.Receive(ctx)
+		if recvErr != nil {
+			errCh <- recvErr
 			return
 		}
 		reply, _ := protocol.NewMessage(msg.ID, protocol.TypeOK, nil)
@@ -78,15 +78,15 @@ func TestTCPLoopbackRoundTrip(t *testing.T) {
 	}()
 
 	cli := NewTCP(addr)
-	if err := cli.Open(ctx); err != nil {
+	if err = cli.Open(ctx); err != nil {
 		t.Fatal(err)
 	}
-	defer cli.Close()
+	defer func() { _ = cli.Close() }()
 	hello, err := protocol.NewMessage("1", protocol.TypeHello, protocol.HelloPayload{Protocol: protocol.Version, Name: "test"})
 	if err != nil {
 		t.Fatal(err)
 	}
-	if err := cli.Send(ctx, hello); err != nil {
+	if err = cli.Send(ctx, hello); err != nil {
 		t.Fatal(err)
 	}
 	got, err := cli.Receive(ctx)

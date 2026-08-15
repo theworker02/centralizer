@@ -51,7 +51,7 @@ func Open(ctx context.Context, tr transport.Transport, plan bridge.Plan) (*Sessi
 		_ = tr.Close()
 		return nil, err
 	}
-	if err := tr.Send(ctx, hello); err != nil {
+	if err = tr.Send(ctx, hello); err != nil {
 		_ = tr.Close()
 		return nil, err
 	}
@@ -211,7 +211,7 @@ func (s *Session) Describe(ctx context.Context) (*schema.Schema, error) {
 		return nil, err
 	}
 	var p protocol.DescribePayload
-	if err := protocol.DecodePayload(reply, &p); err != nil {
+	if err = protocol.DecodePayload(reply, &p); err != nil {
 		return nil, err
 	}
 	if p.Schema == "" {
@@ -311,17 +311,6 @@ func (s *Session) Stream(ctx context.Context, name string, args map[string]cir.V
 
 func (s *Session) Subscribe(ctx context.Context, event string) (bridge.Stream, error) {
 	return s.Stream(ctx, event, nil)
-}
-
-func (s *Session) pumpStream(st *memStream) {
-	s.mu.Lock()
-	ch, ok := s.pending[st.id]
-	if !ok {
-		ch = make(chan protocol.Message, 32)
-		s.pending[st.id] = ch
-	}
-	s.mu.Unlock()
-	s.pumpStreamFrom(st, ch)
 }
 
 func (s *Session) pumpStreamFrom(st *memStream, ch <-chan protocol.Message) {

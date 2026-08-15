@@ -12,9 +12,9 @@ func TestTransportName(t *testing.T) {
 		StrategyWASM:         "wasm",
 		StrategySharedMemory: "shared_memory",
 	}
-	for strat, want := range cases {
-		if got := TransportName(strat); got != want {
-			t.Fatalf("%s: got %q want %q", strat, got, want)
+	for strategy, want := range cases {
+		if got := TransportName(strategy); got != want {
+			t.Fatalf("%s: got %q want %q", strategy, got, want)
 		}
 	}
 	if TransportName(Strategy("unknown")) != "unknown" {

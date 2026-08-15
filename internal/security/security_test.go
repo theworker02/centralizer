@@ -1,6 +1,7 @@
 package security
 
 import (
+	"errors"
 	"os"
 	"path/filepath"
 	"testing"
@@ -70,11 +71,5 @@ func TestNativeDenied(t *testing.T) {
 }
 
 func isPolicy(err error) bool {
-	return err != nil && (err == czerr.ErrPolicyDenied || unwrap(err))
-}
-
-func unwrap(err error) bool {
-	type is interface{ Is(error) bool }
-	u, ok := err.(is)
-	return ok && u.Is(czerr.ErrPolicyDenied)
+	return errors.Is(err, czerr.ErrPolicyDenied)
 }

@@ -36,7 +36,7 @@ func TestNativeCall(t *testing.T) {
 	if err != nil {
 		t.Fatal(err)
 	}
-	defer svc.Close(ctx)
+	defer func() { _ = svc.Close(ctx) }()
 	if svc.Language() != "Go" {
 		t.Fatalf("language=%s", svc.Language())
 	}

@@ -4,6 +4,7 @@ package transport
 
 import (
 	"context"
+	"errors"
 	"io"
 
 	"github.com/theworker02/centralizer/internal/protocol"
@@ -88,10 +89,10 @@ func (p *pipeTransport) Close() error {
 }
 
 func mapCtx(err error) error {
-	if err == context.Canceled {
+	if errors.Is(err, context.Canceled) {
 		return czerr.Wrap(czerr.ErrCancelled, "transport", err)
 	}
-	if err == context.DeadlineExceeded {
+	if errors.Is(err, context.DeadlineExceeded) {
 		return czerr.Wrap(czerr.ErrTimeout, "transport", err)
 	}
 	return err

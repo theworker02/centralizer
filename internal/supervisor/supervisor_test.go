@@ -90,7 +90,7 @@ func TestRestartBudget(t *testing.T) {
 		t.Fatal("expected error")
 	}
 	_, err = s.Call(context.Background(), "f", nil)
-	if !is(err, czerr.ErrQuarantined) && err != czerr.ErrQuarantined {
+	if !is(err, czerr.ErrQuarantined) {
 		// second call should be quarantined after budget
 		if s.Snapshot().State != "quarantined" && !is(err, czerr.ErrQuarantined) {
 			t.Fatalf("err=%v state=%s", err, s.Snapshot().State)

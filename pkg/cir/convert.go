@@ -151,7 +151,11 @@ func fromReflect(rv reflect.Value) (Value, error) {
 		return Map(keys, vals)
 	case reflect.Struct:
 		if rv.Type() == reflect.TypeOf(time.Time{}) {
-			return Timestamp(rv.Interface().(time.Time)), nil
+			ts, ok := rv.Interface().(time.Time)
+			if !ok {
+				return Value{}, czerr.New(czerr.ErrConversion, "time.Time assertion failed")
+			}
+			return Timestamp(ts), nil
 		}
 		t := rv.Type()
 		keys := make([]string, 0, t.NumField())

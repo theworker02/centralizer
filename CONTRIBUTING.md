@@ -15,6 +15,7 @@ Use `gofmt`. Do not add dependencies unless the standard library is insufficient
 
 ## Pull requests
 
+- Target `main`. This repository does not use `master`.
 - Keep changes focused.
 - Include tests for new behavior.
 - Update documentation and the compatibility matrix when a capability becomes real.

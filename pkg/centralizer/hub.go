@@ -155,7 +155,7 @@ func (h *Hub) Connect(ctx context.Context, ref string, opts ...Option) (*Service
 		}
 	}
 	pol := security.Engine{Policy: cfg.policy}
-	if err := pol.AllowRuntime(analysis.Primary.Adapter); err != nil {
+	if err = pol.AllowRuntime(analysis.Primary.Adapter); err != nil {
 		return nil, err
 	}
 

@@ -19,7 +19,7 @@ var (
 	ErrSchemaMismatch     = errors.New("centralizer: schema mismatch")
 	ErrConversion         = errors.New("centralizer: conversion failed")
 	ErrTimeout            = errors.New("centralizer: timeout")
-	ErrCancelled          = errors.New("centralizer: cancelled")
+	ErrCancelled          = errors.New("centralizer: canceled")
 	ErrHandleInvalid      = errors.New("centralizer: invalid handle")
 	ErrPolicyDenied       = errors.New("centralizer: policy denied")
 	ErrAdapterFailure     = errors.New("centralizer: adapter failure")

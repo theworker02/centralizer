@@ -109,7 +109,7 @@ func parseGlobal(args []string) (global, []string) {
 }
 
 func usage(w io.Writer) {
-	fmt.Fprint(w, `centralizer — One runtime. Every language.
+	_, _ = fmt.Fprint(w, `centralizer — One runtime. Every language.
 
 Usage:
   centralizer <command> [target] [flags]
@@ -165,9 +165,13 @@ func emit(g global, v any, text string) error {
 		return enc.Encode(v)
 	}
 	if !g.Quiet {
-		fmt.Fprint(os.Stdout, text)
+		if _, err := fmt.Fprint(os.Stdout, text); err != nil {
+			return err
+		}
 		if !strings.HasSuffix(text, "\n") {
-			fmt.Fprintln(os.Stdout)
+			if _, err := fmt.Fprintln(os.Stdout); err != nil {
+				return err
+			}
 		}
 	}
 	return nil
@@ -227,7 +231,7 @@ func cmdDescribe(ctx context.Context, g global, rest []string) error {
 	if err != nil {
 		return err
 	}
-	defer svc.Close(ctx)
+	defer func() { _ = svc.Close(ctx) }()
 	sc, err := svc.Describe(ctx)
 	if err != nil {
 		return err
@@ -245,7 +249,7 @@ func cmdConnect(ctx context.Context, g global, rest []string) error {
 	if err != nil {
 		return err
 	}
-	defer svc.Close(ctx)
+	defer func() { _ = svc.Close(ctx) }()
 	h := svc.Health()
 	return emit(g, h, h.Text())
 }
@@ -259,7 +263,7 @@ func cmdCall(ctx context.Context, g global, rest []string) error {
 	if err != nil {
 		return err
 	}
-	defer svc.Close(ctx)
+	defer func() { _ = svc.Close(ctx) }()
 	args := centralizer.Args{}
 	for _, kv := range rest[2:] {
 		k, v, ok := strings.Cut(kv, "=")
@@ -306,7 +310,7 @@ func cmdHealth(ctx context.Context, g global, rest []string) error {
 	if err != nil {
 		return err
 	}
-	defer svc.Close(ctx)
+	defer func() { _ = svc.Close(ctx) }()
 	h := svc.Health()
 	return emit(g, h, h.Text())
 }
@@ -384,7 +388,7 @@ func cmdTrace(ctx context.Context, g global, rest []string) error {
 	if err != nil {
 		return err
 	}
-	defer svc.Close(ctx)
+	defer func() { _ = svc.Close(ctx) }()
 	text := fmt.Sprintf("trace %s\n  discovery+plan+startup: %s\n  adapter: %s\n  transport: %s\n",
 		ref, time.Since(start).Round(time.Millisecond), svc.Plan().Adapter, svc.Transport())
 	return emit(g, map[string]any{

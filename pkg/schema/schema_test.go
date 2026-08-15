@@ -57,7 +57,7 @@ func TestDiscoverExplicitAndSidecar(t *testing.T) {
 		t.Fatal("explicit sidecar must not be inferred")
 	}
 	other := filepath.Join(dir, "custom.yaml")
-	if err := os.WriteFile(other, []byte("service: custom\nfunctions: {}\n"), 0o644); err != nil {
+	if err = os.WriteFile(other, []byte("service: custom\nfunctions: {}\n"), 0o644); err != nil {
 		t.Fatal(err)
 	}
 	sc, err = Discover(dir, "custom.yaml")

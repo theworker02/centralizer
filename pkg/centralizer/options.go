@@ -1,7 +1,6 @@
 package centralizer
 
 import (
-	"io"
 	"log/slog"
 	"time"
 
@@ -25,7 +24,6 @@ type config struct {
 	prefer      []string
 	language    string
 	adapters    []adapter.Adapter
-	output      io.Writer
 	handleTTL   time.Duration
 }
 

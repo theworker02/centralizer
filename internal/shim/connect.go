@@ -71,7 +71,7 @@ func ConnectTCP(ctx context.Context, cfg StdioConfig) (bridge.Bridge, error) {
 	cmd := exec.CommandContext(ctx, cfg.Argv[0], cfg.Argv[1:]...)
 	cmd.Dir = cfg.Dir
 	cmd.Env = security.FilterEnv(env)
-	if err := cmd.Start(); err != nil {
+	if err = cmd.Start(); err != nil {
 		_ = ln.Close()
 		return nil, czerr.Wrap(czerr.ErrTransportFailure, "start tcp child", err)
 	}

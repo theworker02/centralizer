@@ -17,7 +17,7 @@ func TestNDJSONRoundTrip(t *testing.T) {
 		t.Fatal(err)
 	}
 	var buf bytes.Buffer
-	if err := WriteNDJSON(&buf, m); err != nil {
+	if err = WriteNDJSON(&buf, m); err != nil {
 		t.Fatal(err)
 	}
 	got, err := ReadNDJSON(bufio.NewReader(&buf))
@@ -28,7 +28,7 @@ func TestNDJSONRoundTrip(t *testing.T) {
 		t.Fatalf("%+v", got)
 	}
 	var p CallPayload
-	if err := DecodePayload(got, &p); err != nil {
+	if err = DecodePayload(got, &p); err != nil {
 		t.Fatal(err)
 	}
 	args, err := DecodeArgs(p.Args)
@@ -51,7 +51,7 @@ func TestFrameRoundTrip(t *testing.T) {
 		t.Fatal(err)
 	}
 	var buf bytes.Buffer
-	if err := WriteFrame(&buf, m, 0); err != nil {
+	if err = WriteFrame(&buf, m, 0); err != nil {
 		t.Fatal(err)
 	}
 	got, err := ReadFrame(&buf, 0)

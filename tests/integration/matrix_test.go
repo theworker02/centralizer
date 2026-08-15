@@ -44,7 +44,7 @@ func TestGoPython(t *testing.T) {
 	if err != nil {
 		t.Fatal(err)
 	}
-	defer svc.Close(ctx)
+	defer func() { _ = svc.Close(ctx) }()
 	v, err := svc.Call(ctx, "calculate", centralizer.Args{"value": 21})
 	if err != nil {
 		t.Fatal(err)
@@ -67,7 +67,7 @@ func TestGoNode(t *testing.T) {
 	if err != nil {
 		t.Fatal(err)
 	}
-	defer svc.Close(ctx)
+	defer func() { _ = svc.Close(ctx) }()
 	v, err := svc.Call(ctx, "ping", nil)
 	if err != nil {
 		t.Fatal(err)
@@ -92,12 +92,12 @@ func TestGoPythonStream(t *testing.T) {
 	if err != nil {
 		t.Fatal(err)
 	}
-	defer svc.Close(ctx)
+	defer func() { _ = svc.Close(ctx) }()
 	st, err := svc.Stream(ctx, "count_up", centralizer.Args{"n": 3})
 	if err != nil {
 		t.Fatal(err)
 	}
-	defer st.Close()
+	defer func() { _ = st.Close() }()
 	var got []int64
 	for v := range st.Values() {
 		n, err := v.Int()
@@ -129,7 +129,7 @@ func TestGoPythonTCP(t *testing.T) {
 	if err != nil {
 		t.Fatal(err)
 	}
-	defer svc.Close(ctx)
+	defer func() { _ = svc.Close(ctx) }()
 	if svc.Transport() != "tcp" {
 		t.Fatalf("transport=%s", svc.Transport())
 	}
@@ -155,12 +155,12 @@ func TestGoNodeStream(t *testing.T) {
 	if err != nil {
 		t.Fatal(err)
 	}
-	defer svc.Close(ctx)
+	defer func() { _ = svc.Close(ctx) }()
 	st, err := svc.Stream(ctx, "countUp", centralizer.Args{"n": 3})
 	if err != nil {
 		t.Fatal(err)
 	}
-	defer st.Close()
+	defer func() { _ = st.Close() }()
 	var n int
 	for range st.Values() {
 		n++
@@ -184,7 +184,7 @@ func TestExplicitSchema(t *testing.T) {
 	if err != nil {
 		t.Fatal(err)
 	}
-	defer svc.Close(ctx)
+	defer func() { _ = svc.Close(ctx) }()
 	sc, err := svc.Describe(ctx)
 	if err != nil {
 		t.Fatal(err)
