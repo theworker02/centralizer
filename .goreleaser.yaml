@@ -52,6 +52,9 @@ sboms:
 
 release:
   draft: false
+  # Re-runs on an existing tag (or a manually created GitHub release) should
+  # replace same-named assets instead of failing with HTTP 422.
+  replace_existing_artifacts: true
   extra_files:
     - glob: ./LICENSE
     - glob: ./NOTICE
