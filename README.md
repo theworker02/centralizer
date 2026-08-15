@@ -14,13 +14,20 @@
 
 <p align="center">
   <a href="https://github.com/theworker02/centralizer/actions/workflows/test.yml"><img src="https://github.com/theworker02/centralizer/actions/workflows/test.yml/badge.svg" alt="CI"></a>
-  <a href="https://pkg.go.dev/github.com/theworker02/centralizer/pkg/centralizer"><img src="https://pkg.go.dev/badge/github.com/theworker02/centralizer/pkg/centralizer.svg" alt="Go Reference"></a>
+  <a href="https://pkg.go.dev/github.com/theworker02/centralizer"><img src="https://pkg.go.dev/badge/github.com/theworker02/centralizer.svg" alt="Go Reference"></a>
   <a href="https://goreportcard.com/report/github.com/theworker02/centralizer"><img src="https://goreportcard.com/badge/github.com/theworker02/centralizer" alt="Go Report Card"></a>
   <a href="https://github.com/theworker02/centralizer/security/code-scanning"><img src="https://github.com/theworker02/centralizer/actions/workflows/codeql.yml/badge.svg" alt="CodeQL"></a>
   <a href="LICENSE"><img src="https://img.shields.io/badge/license-Apache%202.0-blue.svg" alt="License"></a>
   <a href="https://github.com/theworker02/centralizer/releases"><img src="https://img.shields.io/github/v/release/theworker02/centralizer?include_prereleases" alt="Latest Release"></a>
   <a href="https://theworker02.github.io/centralizer/"><img src="https://img.shields.io/badge/docs-GitHub%20Pages-c9844a" alt="Docs"></a>
   <a href="PRIVACY.md"><img src="https://img.shields.io/badge/privacy-local%20only-informational" alt="Privacy"></a>
+</p>
+
+<p align="center">
+  <strong>Official module:</strong>
+  <a href="https://pkg.go.dev/github.com/theworker02/centralizer">https://pkg.go.dev/github.com/theworker02/centralizer</a><br>
+  <strong>This version (v0.1.2):</strong>
+  <a href="https://pkg.go.dev/github.com/theworker02/centralizer@v0.1.2">https://pkg.go.dev/github.com/theworker02/centralizer@v0.1.2</a>
 </p>
 
 ```go
@@ -36,7 +43,13 @@ result, err := service.Call(ctx, "calculate", centralizer.Args{
 
 The calling application does not need to know which bridge Centralizer selected.
 
-Module path: [`github.com/theworker02/centralizer`](https://pkg.go.dev/github.com/theworker02/centralizer).
+Official module: [pkg.go.dev/github.com/theworker02/centralizer](https://pkg.go.dev/github.com/theworker02/centralizer) · [v0.1.2](https://pkg.go.dev/github.com/theworker02/centralizer@v0.1.2)
+
+```bash
+go get github.com/theworker02/centralizer@latest
+# or pin: go get github.com/theworker02/centralizer@v0.1.2
+```
+
 Docs site: [theworker02.github.io/centralizer](https://theworker02.github.io/centralizer/).
 License: [Apache 2.0](LICENSE). Privacy: [PRIVACY.md](PRIVACY.md).
 
@@ -516,7 +529,19 @@ See [ADAPTERS.md](ADAPTERS.md), [docs/sdk.md](docs/sdk.md), and `adapters/*/READ
 
 Requires Go 1.23+. The library dependency graph is the Go standard library plus `gopkg.in/yaml.v3`.
 
+**Official module:** [https://pkg.go.dev/github.com/theworker02/centralizer](https://pkg.go.dev/github.com/theworker02/centralizer)  
+**This version:** [https://pkg.go.dev/github.com/theworker02/centralizer@v0.1.2](https://pkg.go.dev/github.com/theworker02/centralizer@v0.1.2)
+
+```bash
+go get github.com/theworker02/centralizer@latest
+go get github.com/theworker02/centralizer@v0.1.2
+```
+
+`@latest` follows the highest SemVer tag the proxy has seen. Pin `@v0.1.2` (or another tag) before 1.0.
+
 ### Library
+
+The public Hub API lives at `pkg/centralizer`:
 
 ```bash
 go get github.com/theworker02/centralizer/pkg/centralizer@v0.1.2
