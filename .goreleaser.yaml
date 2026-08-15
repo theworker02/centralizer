@@ -1,0 +1,57 @@
+version: 2
+
+project_name: centralizer
+
+before:
+  hooks:
+    - go mod tidy
+
+builds:
+  - id: centralizer
+    main: ./cmd/centralizer
+    binary: centralizer
+    env: [CGO_ENABLED=0]
+    ldflags:
+      - -s -w -X github.com/theworker02/centralizer/internal/version.Version={{.Version}}
+    goos: [linux, windows, darwin]
+    goarch: [amd64, arm64]
+    ignore:
+      - goos: windows
+        goarch: arm64
+  - id: centralizerd
+    main: ./cmd/centralizerd
+    binary: centralizerd
+    env: [CGO_ENABLED=0]
+    ldflags:
+      - -s -w -X github.com/theworker02/centralizer/internal/version.Version={{.Version}}
+    goos: [linux, windows, darwin]
+    goarch: [amd64, arm64]
+    ignore:
+      - goos: windows
+        goarch: arm64
+
+archives:
+  - formats: [tar.gz]
+    name_template: "{{ .ProjectName }}_{{ .Version }}_{{ .Os }}_{{ .Arch }}"
+    format_overrides:
+      - goos: windows
+        formats: [zip]
+
+checksum:
+  name_template: checksums.txt
+
+changelog:
+  sort: asc
+  filters:
+    exclude:
+      - "^docs:"
+      - "^test:"
+
+sboms:
+  - artifacts: archive
+
+release:
+  draft: false
+  extra_files:
+    - glob: ./LICENSE
+    - glob: ./NOTICE

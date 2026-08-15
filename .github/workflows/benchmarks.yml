@@ -1,0 +1,17 @@
+name: benchmarks
+
+on:
+  workflow_dispatch:
+  schedule:
+    - cron: "0 5 * * 1"
+
+jobs:
+  bench:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+      - uses: actions/setup-go@v5
+        with:
+          go-version: "1.23.x"
+      - name: Run microbenchmarks
+        run: go test -bench=. -benchmem ./benchmarks ./pkg/cir ./internal/protocol

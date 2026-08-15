@@ -1,0 +1,40 @@
+name: Adapter request
+description: Request or offer a language / runtime adapter
+labels: [adapter]
+body:
+  - type: input
+    id: language
+    attributes:
+      label: Language / runtime
+    validations:
+      required: true
+  - type: textarea
+    id: usecase
+    attributes:
+      label: Use case
+    validations:
+      required: true
+  - type: input
+    id: official
+    attributes:
+      label: Official runtime
+      placeholder: CPython, Node.js, OpenJDK, …
+  - type: textarea
+    id: bridges
+    attributes:
+      label: Possible bridge mechanisms
+      placeholder: stdio, native ABI, WASM, embed, RPC
+  - type: textarea
+    id: platforms
+    attributes:
+      label: Platform requirements
+  - type: input
+    id: example
+    attributes:
+      label: Example project
+  - type: checkboxes
+    id: contribute
+    attributes:
+      label: Willingness to contribute
+      options:
+        - label: I can help implement or maintain this adapter

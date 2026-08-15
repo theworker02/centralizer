@@ -1,0 +1,8 @@
+blank_issues_enabled: false
+contact_links:
+  - name: Security report
+    url: https://github.com/theworker02/centralizer/security/advisories/new
+    about: Report protocol, injection, or sandbox issues privately.
+  - name: Discussions
+    url: https://github.com/theworker02/centralizer/discussions
+    about: Design and usage questions.

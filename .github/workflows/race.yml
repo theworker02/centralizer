@@ -1,0 +1,17 @@
+name: race
+
+on:
+  push:
+    branches: [main, master]
+  pull_request:
+
+jobs:
+  race:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+      - uses: actions/setup-go@v5
+        with:
+          go-version: "1.23.x"
+      - name: Race tests
+        run: go test -race ./...

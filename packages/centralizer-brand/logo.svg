@@ -1,0 +1,22 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 256 256" role="img" aria-label="Centralizer">
+  <title>Centralizer</title>
+  <rect width="256" height="256" rx="36" fill="#1b1d21"/>
+  <g fill="none" stroke="#c9844a" stroke-width="7" stroke-linecap="round">
+    <path d="M48 72 C48 48 78 36 112 36"/>
+    <path d="M48 184 C48 208 78 220 112 220"/>
+    <path d="M48 128 H96"/>
+  </g>
+  <circle cx="128" cy="128" r="22" fill="#c9844a"/>
+  <circle cx="128" cy="128" r="10" fill="#f4efe6"/>
+  <g fill="none" stroke="#d7d2c8" stroke-width="7" stroke-linecap="round">
+    <path d="M160 128 H208"/>
+    <path d="M152 104 L196 72"/>
+    <path d="M152 152 L196 184"/>
+  </g>
+  <circle cx="48" cy="72" r="7" fill="#d7d2c8"/>
+  <circle cx="48" cy="128" r="7" fill="#d7d2c8"/>
+  <circle cx="48" cy="184" r="7" fill="#d7d2c8"/>
+  <circle cx="208" cy="128" r="7" fill="#c9844a"/>
+  <circle cx="196" cy="72" r="7" fill="#c9844a"/>
+  <circle cx="196" cy="184" r="7" fill="#c9844a"/>
+</svg>

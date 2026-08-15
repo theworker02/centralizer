@@ -1,0 +1,19 @@
+centralizer:
+  version: 1
+services:
+  analytics:
+    source: ./examples/go-python/analytics
+    language: auto
+    schema: schema.yaml
+  engine:
+    source: ./examples/go-rust/engine
+    language: rust
+    prefer:
+      - stdio
+policy:
+  recovery: automatic
+  isolation: process
+  tracing: true
+  native_execution: true
+  network: localhost_only
+  subprocesses: true

@@ -1,0 +1,17 @@
+service: analytics
+version: "1"
+functions:
+  calculate:
+    args:
+      value: float
+    returns:
+      type: float
+  ping:
+    args: {}
+    returns:
+      type: string
+  count_up:
+    args:
+      n: int
+    returns:
+      type: int

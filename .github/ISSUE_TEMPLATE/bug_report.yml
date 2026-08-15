@@ -1,0 +1,78 @@
+name: Bug report
+description: Something Centralizer did incorrectly or unsafely
+labels: [bug]
+body:
+  - type: input
+    id: version
+    attributes:
+      label: Centralizer version
+      placeholder: 0.1.0 / git SHA
+    validations:
+      required: true
+  - type: input
+    id: go
+    attributes:
+      label: Go version
+    validations:
+      required: true
+  - type: input
+    id: os
+    attributes:
+      label: OS
+      placeholder: linux / windows / darwin
+    validations:
+      required: true
+  - type: input
+    id: arch
+    attributes:
+      label: Architecture
+      placeholder: amd64 / arm64
+  - type: input
+    id: adapter
+    attributes:
+      label: Adapter
+      placeholder: python / node / go / rust
+  - type: input
+    id: runtime
+    attributes:
+      label: Runtime version
+      placeholder: CPython 3.13, Node 22, rustc …
+  - type: input
+    id: transport
+    attributes:
+      label: Transport
+      placeholder: stdio / native / tcp
+  - type: dropdown
+    id: target
+    attributes:
+      label: Target type
+      options: [project directory, executable, shared library, WASM, native handler, other]
+  - type: textarea
+    id: repro
+    attributes:
+      label: Reproduction
+    validations:
+      required: true
+  - type: textarea
+    id: expected
+    attributes:
+      label: Expected behavior
+    validations:
+      required: true
+  - type: textarea
+    id: actual
+    attributes:
+      label: Actual behavior
+    validations:
+      required: true
+  - type: textarea
+    id: logs
+    attributes:
+      label: Logs
+      render: text
+  - type: textarea
+    id: trace
+    attributes:
+      label: Trace output
+      description: `centralizer trace <target> --json`
+      render: json

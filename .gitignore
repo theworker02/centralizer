@@ -1,0 +1,53 @@
+# Binaries
+/bin/
+/dist/
+*.exe
+*.exe~
+*.dll
+*.so
+*.dylib
+/centralizer
+/centralizerd
+/cmd/centralizer/centralizer
+/cmd/centralizerd/centralizerd
+
+# Test and coverage
+*.test
+*.out
+coverage.out
+coverage.html
+*.prof
+
+# Go workspace
+go.work
+go.work.sum
+
+# Cache and generated artifacts
+.centralizer/
+*.lock
+!go.sum
+!centralizer.lock
+
+# IDE
+.idea/
+.vscode/
+*.swp
+*.swo
+.DS_Store
+Thumbs.db
+
+# Website
+website/node_modules/
+website/dist/
+website/.vite/
+packages/**/node_modules/
+
+# Example language artifacts
+examples/**/target/
+examples/**/__pycache__/
+examples/**/node_modules/
+examples/**/.venv/
+**/Cargo.lock
+
+# OS
+desktop.ini

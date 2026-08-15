@@ -1,0 +1,9 @@
+[package]
+name = "engine"
+version = "0.1.0"
+edition = "2021"
+description = "Centralizer example Rust numerical engine"
+
+[[bin]]
+name = "engine"
+path = "src/main.rs"

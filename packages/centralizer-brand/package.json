@@ -1,0 +1,50 @@
+{
+  "name": "@theworker02/centralizer-brand",
+  "version": "0.1.1",
+  "description": "Official Centralizer brand assets — One runtime. Every language.",
+  "license": "Apache-2.0",
+  "type": "module",
+  "main": "index.js",
+  "exports": {
+    ".": "./index.js",
+    "./logo.svg": "./logo.svg",
+    "./logo-dark.svg": "./logo-dark.svg",
+    "./logo-light.svg": "./logo-light.svg",
+    "./icon.svg": "./icon.svg",
+    "./icon-256.png": "./icon-256.png",
+    "./icon-512.png": "./icon-512.png",
+    "./github-social-preview.png": "./github-social-preview.png"
+  },
+  "files": [
+    "logo.svg",
+    "logo-dark.svg",
+    "logo-light.svg",
+    "icon.svg",
+    "icon-256.png",
+    "icon-512.png",
+    "github-social-preview.png",
+    "index.js",
+    "index.d.ts",
+    "README.md"
+  ],
+  "logo": "logo.svg",
+  "homepage": "https://theworker02.github.io/centralizer/",
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/theworker02/centralizer.git",
+    "directory": "packages/centralizer-brand"
+  },
+  "bugs": {
+    "url": "https://github.com/theworker02/centralizer/issues"
+  },
+  "author": "theworker02",
+  "keywords": [
+    "centralizer",
+    "brand",
+    "logo",
+    "interop"
+  ],
+  "publishConfig": {
+    "access": "public"
+  }
+}

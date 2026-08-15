@@ -1,0 +1,9 @@
+service: analytics
+version: "1"
+functions:
+  calculate:
+    args:
+      dataset: bytes
+      iterations: uint
+    returns:
+      type: float

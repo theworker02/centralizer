@@ -1,0 +1,23 @@
+name: fuzz
+
+on:
+  schedule:
+    - cron: "0 4 * * 1"
+  workflow_dispatch:
+
+jobs:
+  fuzz:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+      - uses: actions/setup-go@v5
+        with:
+          go-version: "1.23.x"
+      - name: Fuzz CIR and protocol
+        run: |
+          go test -fuzz=FuzzDecodeWire -fuzztime=30s ./pkg/cir
+          go test -fuzz=FuzzParse -fuzztime=20s ./pkg/manifest
+          go test -fuzz=FuzzParseYAML -fuzztime=20s ./pkg/schema
+          go test -fuzz=FuzzReadNDJSON -fuzztime=20s ./internal/protocol
+          go test -fuzz=FuzzReadFrame -fuzztime=20s ./internal/protocol
+          go test -fuzz=FuzzHandleIDs -fuzztime=10s ./internal/lifecycle

@@ -1,0 +1,6 @@
+{
+  "name": "reporter",
+  "version": "0.1.0",
+  "description": "Centralizer example Node target",
+  "main": "index.js"
+}
