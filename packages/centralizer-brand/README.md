@@ -36,4 +36,4 @@ After changing files in `assets/`, run `node scripts/sync-brand.mjs` from the re
 
 ## License
 
-Apache-2.0. See the repository [LICENSE](https://github.com/theworker02/centralizer/blob/main/LICENSE) and [NOTICE](https://github.com/theworker02/centralizer/blob/main/NOTICE).
+SEE LICENSE IN LICENSE (proprietary; historical Apache tags remain Apache). See the repository [LICENSE](https://github.com/theworker02/centralizer/blob/main/LICENSE) and [NOTICE](https://github.com/theworker02/centralizer/blob/main/NOTICE).

@@ -51,7 +51,7 @@ go get github.com/theworker02/centralizer@latest
 ```
 
 Docs site: [theworker02.github.io/centralizer](https://theworker02.github.io/centralizer/).
-License: [Apache 2.0](LICENSE). Privacy: [PRIVACY.md](PRIVACY.md).
+License: [Proprietary source-available](LICENSE) — see [LICENSE_TRANSITION_NOTICE.md](LICENSE_TRANSITION_NOTICE.md). Privacy: [PRIVACY.md](PRIVACY.md).
 
 ## Contents
 

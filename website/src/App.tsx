@@ -633,7 +633,7 @@ function Changelog() {
       <h3>0.1.0</h3>
       <p>
         Go hub API, CIR, Protocol 1.0, discovery, planner, supervisor, Python /
-        Node / Rust adapters, CLI, optional daemon, tests, Apache 2.0.
+        Node / Rust adapters, CLI, optional daemon, tests, source-available proprietary (see LICENSE).
       </p>
     </>
   );
