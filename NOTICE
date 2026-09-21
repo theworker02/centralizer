@@ -1,10 +1,13 @@
 Centralizer
-Copyright 2026 The Centralizer Authors
+Copyright (c) 2026 theworker02 (https://github.com/theworker02)
 
-This product includes software developed by The Centralizer Authors.
+This product's current distribution terms are proprietary / source-available.
+See LICENSE and LICENSE_TRANSITION_NOTICE.md.
 
-Licensed under the Apache License, Version 2.0.
+Historical releases tagged under Apache License, Version 2.0 (including v0.1.2)
+remain governed by Apache-2.0 for those copies, where applicable.
 
-License transition (prior public terms ? proprietary) and enforcement posture: see LICENSE_TRANSITION_NOTICE.md.
-Commercial use: see COMMERCIAL.md.
+This product includes software developed as dependencies under their own licenses
+(see go.mod / website package-lock). Retain upstream notices on redistribution.
 
+Third-party trademarks remain the property of their respective owners.
