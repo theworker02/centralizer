@@ -1,4 +1,4 @@
-<p align="center">
+﻿<p align="center">
   <img src="assets/logo.svg" width="120" alt="Centralizer logo">
 </p>
 
@@ -17,7 +17,7 @@
   <a href="https://pkg.go.dev/github.com/theworker02/centralizer"><img src="https://pkg.go.dev/badge/github.com/theworker02/centralizer.svg" alt="Go Reference"></a>
   <a href="https://goreportcard.com/report/github.com/theworker02/centralizer"><img src="https://goreportcard.com/badge/github.com/theworker02/centralizer" alt="Go Report Card"></a>
   <a href="https://github.com/theworker02/centralizer/security/code-scanning"><img src="https://github.com/theworker02/centralizer/actions/workflows/codeql.yml/badge.svg" alt="CodeQL"></a>
-  <a href="LICENSE"><img src="https://img.shields.io/badge/license-Apache%202.0-blue.svg" alt="License"></a>
+  <a href="LICENSE"><img src="https://img.shields.io/badge/license-Proprietary%20(source--available)-blue.svg" alt="License"></a>
   <a href="https://github.com/theworker02/centralizer/releases"><img src="https://img.shields.io/github/v/release/theworker02/centralizer?include_prereleases" alt="Latest Release"></a>
   <a href="https://theworker02.github.io/centralizer/"><img src="https://img.shields.io/badge/docs-GitHub%20Pages-c9844a" alt="Docs"></a>
   <a href="PRIVACY.md"><img src="https://img.shields.io/badge/privacy-local%20only-informational" alt="Privacy"></a>
@@ -43,7 +43,7 @@ result, err := service.Call(ctx, "calculate", centralizer.Args{
 
 The calling application does not need to know which bridge Centralizer selected.
 
-Official module: [pkg.go.dev/github.com/theworker02/centralizer](https://pkg.go.dev/github.com/theworker02/centralizer) · [v0.1.2](https://pkg.go.dev/github.com/theworker02/centralizer@v0.1.2)
+Official module: [pkg.go.dev/github.com/theworker02/centralizer](https://pkg.go.dev/github.com/theworker02/centralizer) Â· [v0.1.2](https://pkg.go.dev/github.com/theworker02/centralizer@v0.1.2)
 
 ```bash
 go get github.com/theworker02/centralizer@latest
@@ -93,7 +93,7 @@ License: [Apache 2.0](LICENSE). Privacy: [PRIVACY.md](PRIVACY.md).
 Centralizer is a process-local orchestration layer. You point a Hub at a target directory or an in-process Go handler. The Hub:
 
 1. Discovers language and runtime markers (`go.mod`, `pyproject.toml`, `package.json`, `Cargo.toml`, and the rest of the detect set).
-2. Builds a capability graph (stdio, process, native, TCP, …).
+2. Builds a capability graph (stdio, process, native, TCP, â€¦).
 3. Plans a bridge under an explicit policy.
 4. Starts the selected adapter, converting values through CIR.
 5. Supervises the live session: health, bounded recovery, circuit breaker.
@@ -256,7 +256,7 @@ centralizer/
   .github/workflows    test, lint, race, fuzz, CodeQL, Pages, release
 ```
 
-Root markdown files (`ARCHITECTURE.md`, `CIR.md`, `PROTOCOL.md`, …) are canonical so GitHub renders them immediately. The website restates a subset.
+Root markdown files (`ARCHITECTURE.md`, `CIR.md`, `PROTOCOL.md`, â€¦) are canonical so GitHub renders them immediately. The website restates a subset.
 
 ## Compatibility
 
@@ -280,7 +280,7 @@ Only mark a capability complete when tests demonstrate it. Detect-only languages
 Windows notes that are true in this tree:
 
 - Named-pipe **client** dial exists. The server side remains experimental.
-- Doctor on Windows reports the named-pipe client foundation instead of “planned”.
+- Doctor on Windows reports the named-pipe client foundation instead of â€œplannedâ€.
 - `splitRef` treats a Windows drive prefix (`C:`) as a path, not as a scheme.
 - Shared memory is experimental and disabled on every OS.
 
@@ -292,7 +292,7 @@ Unix domain sockets are scored when the host and adapter claim them. They are no
 
 | Kind | Storage | Notes |
 | --- | --- | --- |
-| null | — | |
+| null | â€” | |
 | boolean | `num` 0/1 | |
 | int | `num` as int64 bits | overflow checked on convert |
 | uint | `num` | |
@@ -323,15 +323,15 @@ Wire JSON is kind-tagged. Do not decode CIR by guessing JSON types.
 {"k":"map","m":[{"k":"value","v":{"k":"int","i":42}}]}
 ```
 
-Go uses `cir.From` / `Value.Native`. The Python shim maps `int`→int, `float`→float, `str`→string, `bytes`→bytes, `dict`→map, `list`→array. The Node shim maps integer `number`→int, otherwise float; `Buffer`→bytes; object→map.
+Go uses `cir.From` / `Value.Native`. The Python shim maps `int`â†’int, `float`â†’float, `str`â†’string, `bytes`â†’bytes, `dict`â†’map, `list`â†’array. The Node shim maps integer `number`â†’int, otherwise float; `Buffer`â†’bytes; objectâ†’map.
 
 Schemas sit above CIR. Inferred schemas do not enforce argument types. An explicit `schema.yaml` (or manifest `schema:`) does, including unknown-function rejection. Schema validate also rejects non-finite floats.
 
-Handles are correlation ids. They never store a pointer into another runtime’s heap. `WithHandleTTL` expires locally tracked ids; unknown ids are still forwarded to the peer. `Service.Close` calls `DropBridge` so ids from a dead bridge cannot be reused by accident.
+Handles are correlation ids. They never store a pointer into another runtimeâ€™s heap. `WithHandleTTL` expires locally tracked ids; unknown ids are still forwarded to the peer. `Service.Close` calls `DropBridge` so ids from a dead bridge cannot be reused by accident.
 
 ## Bridge planner
 
-The planner scores strategies on fixed integer weights. Scores are 0–100. Ties break on strategy name so equivalent inputs produce the same ranking.
+The planner scores strategies on fixed integer weights. Scores are 0â€“100. Ties break on strategy name so equivalent inputs produce the same ranking.
 
 | Dimension | Weight |
 | --- | --- |
@@ -353,7 +353,7 @@ Evaluated strategies:
 | in-process | `native` | Registered Go handlers (`native:name`) |
 | Unix socket | `unix_socket` | Persistent process IPC on non-Windows hosts when the adapter claims the capability |
 | named pipe | `named_pipe` | Windows local IPC; client dial exists, server side is experimental |
-| stdio | `stdio` | Supervised child, NDJSON protocol — the portable default |
+| stdio | `stdio` | Supervised child, NDJSON protocol â€” the portable default |
 | TCP | `tcp` | Localhost length-prefixed frames when `prefer: [tcp]` and policy allows loopback |
 | WASM | `wasm` | Planned invocation; detect-only in v0.1 |
 | shared memory | `shared_memory` | Types exist; disabled (`ErrExperimental`) |
@@ -381,14 +381,14 @@ Manifest `prefer` may boost a listed strategy by a small integer. It cannot enab
 
 External bridges are supervised:
 
-`created → starting → healthy → degraded → recovering → unhealthy → quarantined → stopping → stopped`
+`created â†’ starting â†’ healthy â†’ degraded â†’ recovering â†’ unhealthy â†’ quarantined â†’ stopping â†’ stopped`
 
 On a recoverable error (`ErrBridgeFailed`, `ErrTransportFailure`, `ErrTimeout`) the supervisor:
 
 1. Marks the service recovering.
 2. Waits with exponential backoff (default 200 ms, capped at 5 s).
 3. Rebuilds the bridge through the adapter factory.
-4. If rebuild fails, tries the first recorded fallback, mapping strategy → transport correctly (`in_process` → `native`, not the raw strategy string).
+4. If rebuild fails, tries the first recorded fallback, mapping strategy â†’ transport correctly (`in_process` â†’ `native`, not the raw strategy string).
 5. Increments the restart counter. Default budget is 5 (`policy.max_restarts`).
 6. Quarantines the target when the budget is exhausted (`ErrQuarantined`).
 
@@ -421,18 +421,18 @@ Envelope:
 | Type | Direction | Purpose |
 | --- | --- | --- |
 | HELLO | both | version and feature negotiation |
-| CAPABILITIES | peer → host | optional capability list |
+| CAPABILITIES | peer â†’ host | optional capability list |
 | DESCRIBE / DESCRIBE_OK | both | schema YAML |
-| CALL | host → peer | function or method |
-| RESULT | peer → host | CIR value |
+| CALL | host â†’ peer | function or method |
+| RESULT | peer â†’ host | CIR value |
 | ERROR | either | structured error (`schema`, `conversion`, `handle`, `timeout`, `cancel`, `adapter`, `protocol`, `frame`) |
 | STREAM_OPEN / STREAM_DATA / STREAM_CLOSE | both | streams |
 | HANDLE_CREATE / HANDLE_RELEASE | both | opaque objects |
-| GET / SET | host → peer | properties |
+| GET / SET | host â†’ peer | properties |
 | HEARTBEAT | both | liveness |
-| CANCEL | host → peer | abort `id` |
-| SHUTDOWN | host → peer | graceful exit |
-| OK | peer → host | empty success |
+| CANCEL | host â†’ peer | abort `id` |
+| SHUTDOWN | host â†’ peer | graceful exit |
+| OK | peer â†’ host | empty success |
 
 CALL arguments are CIR wire values, not raw JSON types:
 
@@ -486,7 +486,7 @@ Policy fields that the engine actually enforces:
 | `allowed_transports` | Transport-name allow-list (empty = all) |
 | `max_restarts` | Supervisor budget (default 5) |
 
-Default policy (when you pass nothing) is recovery `automatic`, isolation `process`, network `localhost_only`. Empty allow-lists mean “all”. A denied runtime or transport returns `ErrPolicyDenied` before a child starts.
+Default policy (when you pass nothing) is recovery `automatic`, isolation `process`, network `localhost_only`. Empty allow-lists mean â€œallâ€. A denied runtime or transport returns `ErrPolicyDenied` before a child starts.
 
 `centralizer lock <target> [path]` writes `centralizer.lock`: adapter, transport, strategy, fingerprint, scores, reasons. Connect does not require a lock file. `inspect` reads `centralizer.lock` or `<target>.lock` when present and reports `lock_matches` against the live plan. A lock file is a snapshot for review and CI drift detection, not a substitute for policy.
 
@@ -813,7 +813,7 @@ centralizer version
 
 Each CLI invocation constructs a new Hub. `list` and `health` without a long-lived process therefore cannot see services started by another command. Use the library or `centralizerd` if you need a process-wide table.
 
-Exit status is non-zero on typed errors (target missing, policy denied, not implemented, quarantine, …). Prefer `--json` in scripts.
+Exit status is non-zero on typed errors (target missing, policy denied, not implemented, quarantine, â€¦). Prefer `--json` in scripts.
 
 ## Examples
 
@@ -921,7 +921,7 @@ npm install
 npm run dev
 ```
 
-`make website` runs the production build. Enable Pages with **Settings → Pages → Source: GitHub Actions** (`.github/workflows/pages.yml`). There is no custom domain / CNAME.
+`make website` runs the production build. Enable Pages with **Settings â†’ Pages â†’ Source: GitHub Actions** (`.github/workflows/pages.yml`). There is no custom domain / CNAME.
 
 The site copies `assets/logo.svg` and `assets/icon.svg` into `website/public` at build start so the hero, nav, and favicon cannot drift from the canonical mark.
 
@@ -936,7 +936,7 @@ The site copies `assets/logo.svg` and `assets/icon.svg` into `website/public` at
 | `assets/logo-light.svg` | Light-background variant |
 | `assets/icon.svg` | Compact icon / favicon |
 | `assets/icon-256.png`, `assets/icon-512.png` | Raster icons |
-| `assets/github-social-preview.png` | GitHub social preview (1280×640) |
+| `assets/github-social-preview.png` | GitHub social preview (1280Ã—640) |
 
 README, the documentation site, and `@theworker02/centralizer-brand` all use these files. Do not introduce a one-off drawing. Upload `assets/github-social-preview.png` in repository settings for the social preview. See [docs/github-metadata.md](docs/github-metadata.md).
 
@@ -1017,9 +1017,8 @@ Pull requests target `main`. Support channels: [SUPPORT.md](SUPPORT.md).
 
 ## License
 
-Apache License 2.0. See [LICENSE](LICENSE) and [NOTICE](NOTICE).
+**Source-available proprietary** — evaluation under [LICENSE](./LICENSE); commercial / production use via [COMMERCIAL.md](./COMMERCIAL.md). See [LICENSE_TRANSITION_NOTICE.md](./LICENSE_TRANSITION_NOTICE.md) and [NOTICE](./NOTICE).
 
-You may use, modify, and distribute the software under that license. There is no CLA. Contributions are accepted under the same terms.
 
 ## Roadmap
 
