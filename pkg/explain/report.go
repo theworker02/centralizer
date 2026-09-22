@@ -16,23 +16,23 @@ import (
 
 // Report is the structured output of an evaluation-oriented explain.
 type Report struct {
-	Target           string              `json:"target"`
-	DetectionScore   float64             `json:"detection_score"`
-	Language         string              `json:"language"`
-	Runtime          string              `json:"runtime,omitempty"`
-	Adapter          string              `json:"adapter"`
-	Tier             int                 `json:"tier"`
-	CallImplemented  bool                `json:"call_implemented"`
-	AdapterNotes     string              `json:"adapter_notes,omitempty"`
-	SelectedStrategy string              `json:"selected_strategy,omitempty"`
-	SelectedTransport string             `json:"selected_transport,omitempty"`
-	PlanScore        int                 `json:"plan_score,omitempty"`
-	Evidence         []string            `json:"evidence,omitempty"`
-	Hypotheses       []Hypothesis        `json:"hypotheses,omitempty"`
-	NextSteps        []string            `json:"next_steps"`
-	Plan             *planner.Result     `json:"plan,omitempty"`
-	Analysis         *discovery.Result   `json:"analysis,omitempty"`
-	PlannerText      string              `json:"-"`
+	Target            string            `json:"target"`
+	DetectionScore    float64           `json:"detection_score"`
+	Language          string            `json:"language"`
+	Runtime           string            `json:"runtime,omitempty"`
+	Adapter           string            `json:"adapter"`
+	Tier              int               `json:"tier"`
+	CallImplemented   bool              `json:"call_implemented"`
+	AdapterNotes      string            `json:"adapter_notes,omitempty"`
+	SelectedStrategy  string            `json:"selected_strategy,omitempty"`
+	SelectedTransport string            `json:"selected_transport,omitempty"`
+	PlanScore         int               `json:"plan_score,omitempty"`
+	Evidence          []string          `json:"evidence,omitempty"`
+	Hypotheses        []Hypothesis      `json:"hypotheses,omitempty"`
+	NextSteps         []string          `json:"next_steps"`
+	Plan              *planner.Result   `json:"plan,omitempty"`
+	Analysis          *discovery.Result `json:"analysis,omitempty"`
+	PlannerText       string            `json:"-"`
 }
 
 // Hypothesis is one scored detection candidate.

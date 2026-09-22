@@ -25,12 +25,12 @@ type Check struct {
 
 // Report is the full doctor output.
 type Report struct {
-	Version       string   `json:"version"`
-	OS            string   `json:"os"`
-	Arch          string   `json:"arch"`
-	Checks        []Check  `json:"checks"`
-	CallCapable   []string `json:"call_capable,omitempty"`
-	DetectOnly    []string `json:"detect_only,omitempty"`
+	Version     string   `json:"version"`
+	OS          string   `json:"os"`
+	Arch        string   `json:"arch"`
+	Checks      []Check  `json:"checks"`
+	CallCapable []string `json:"call_capable,omitempty"`
+	DetectOnly  []string `json:"detect_only,omitempty"`
 }
 
 // Run inspects the host.
