@@ -40,6 +40,22 @@ var known = map[string]staticInfo{
 	"zig":    {Language: "Zig", Tier: 3, Invocation: false, Notes: "detect-only"},
 }
 
+// Known returns the static catalog entry for a built-in adapter name.
+// Invocation reflects whether Call is implemented — never infer this from Detect.
+func Known(name string) (Info, bool) {
+	s, ok := known[name]
+	if !ok {
+		return Info{}, false
+	}
+	return Info{
+		Name:       name,
+		Language:   s.Language,
+		Tier:       s.Tier,
+		Invocation: s.Invocation,
+		Notes:      s.Notes,
+	}, true
+}
+
 // Catalog lists registered adapters with tier and claimed capabilities.
 func Catalog(r *Registry) []Info {
 	if r == nil {

@@ -12,6 +12,7 @@ import (
 	"github.com/theworker02/centralizer/internal/cache"
 	rt "github.com/theworker02/centralizer/internal/runtime"
 	"github.com/theworker02/centralizer/internal/version"
+	"github.com/theworker02/centralizer/pkg/adapter"
 )
 
 // Check is one doctor finding.
@@ -24,14 +25,21 @@ type Check struct {
 
 // Report is the full doctor output.
 type Report struct {
-	Version string  `json:"version"`
-	OS      string  `json:"os"`
-	Arch    string  `json:"arch"`
-	Checks  []Check `json:"checks"`
+	Version     string   `json:"version"`
+	OS          string   `json:"os"`
+	Arch        string   `json:"arch"`
+	Checks      []Check  `json:"checks"`
+	CallCapable []string `json:"call_capable,omitempty"`
+	DetectOnly  []string `json:"detect_only,omitempty"`
 }
 
 // Run inspects the host.
 func Run(adapterNames []string) Report {
+	return RunCatalog(adapterNames, nil)
+}
+
+// RunCatalog inspects the host and summarizes Call vs detect-only adapters.
+func RunCatalog(adapterNames []string, catalog []adapter.Info) Report {
 	r := Report{Version: version.Version, OS: runtime.GOOS, Arch: runtime.GOARCH}
 	r.Checks = append(r.Checks, goCheck())
 	r.Checks = append(r.Checks, runtimeCheck("Python", rt.Python(), "Install CPython 3 to use the Python adapter."))
@@ -53,6 +61,29 @@ func Run(adapterNames []string) Report {
 			OK:     true,
 			Detail: strings.Join(adapterNames, ", "),
 		})
+	}
+	for _, info := range catalog {
+		if info.Invocation {
+			r.CallCapable = append(r.CallCapable, info.Name)
+		} else {
+			r.DetectOnly = append(r.DetectOnly, info.Name)
+		}
+	}
+	if len(r.CallCapable) > 0 || len(r.DetectOnly) > 0 {
+		r.Checks = append(r.Checks, Check{
+			Name:   "call-capable",
+			OK:     len(r.CallCapable) > 0,
+			Detail: strings.Join(r.CallCapable, ", "),
+			Hint:   "Detect-only adapters must not be treated as Call-ready. Use: centralizer adapters",
+		})
+		if len(r.DetectOnly) > 0 {
+			r.Checks = append(r.Checks, Check{
+				Name:   "detect-only",
+				OK:     true,
+				Detail: strings.Join(r.DetectOnly, ", "),
+				Hint:   "Detection may succeed; Connect/Call return ErrNotImplemented.",
+			})
+		}
 	}
 	return r
 }
@@ -131,7 +162,7 @@ func (r Report) Text() string {
 			fmt.Fprintf(&b, ": %s", c.Detail)
 		}
 		b.WriteByte('\n')
-		if c.Hint != "" && !c.OK {
+		if c.Hint != "" && (!c.OK || c.Name == "detect-only" || c.Name == "call-capable") {
 			fmt.Fprintf(&b, "      %s\n", c.Hint)
 		}
 	}

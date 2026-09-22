@@ -144,7 +144,7 @@ Centralizer should never require the developer to manually solve an interoperabi
 That sentence has limits. Automation that cannot be explained, reproduced, or bounded is not useful in a host process you have to debug. The design constraints are therefore:
 
 - **Determinism.** Equivalent discovery input, capability graph, and policy produce the same ranking. Ties break on strategy name.
-- **Explainability.** Every selection can be printed. `centralizer explain` and `Service.Explanation()` render the same planner report.
+- **Explainability.** Every selection can be printed. `centralizer explain` reports detection score, adapter, Call honesty, and planner detail; `Service.Explanation()` remains available on a live service.
 - **Honesty.** A capability is complete when tests demonstrate it. Detect-only adapters stay detect-only. Files existing under `adapters/` do not imply `Call`.
 - **Bounds.** Recovery has a restart budget and exponential backoff. After the budget the target is quarantined. Infinite restart loops are a bug.
 - **Policy over score.** A higher planner score cannot enable a denied transport, native execution, or subprocess.
@@ -799,10 +799,10 @@ centralizer version
 | `health` | Connect (or report that this process has no long-lived services) |
 | `list` | Registered adapter names |
 | `graph` | Capability graph summary |
-| `explain` | Human-readable planner report |
+| `explain` | Detection score, chosen adapter, Call implemented (catalog), plan, next steps |
 | `bench` | Planner scores for viable strategies; does not override policy |
 | `trace` | Connect with in-process spans; print elapsed / adapter / transport |
-| `doctor` | Host toolchain, cache writability, Git, protocol version, adapters |
+| `doctor` | Host toolchain, cache, Git, protocol, adapters; call-capable vs detect-only |
 | `cache` | List or clear generated shim artifacts |
 | `init` | Write a starter `centralizer.yaml` |
 | `lock` | Write a resolved-plan `centralizer.lock` |
@@ -824,6 +824,7 @@ Exit status is non-zero on typed errors (target missing, policy denied, not impl
 | `examples/go-rust` | Protocol-speaking Rust engine (`multiply`) |
 | `examples/go-c` / `examples/go-cpp` | Detection only (invocation not implemented) |
 | `examples/go-wasm` | Detection notes for `.wasm` |
+| `examples/polyglot-hello` | Go host + explain + Call into Python and Node (no Rust) |
 | `examples/showcase` | One Hub across Python, Rust, and Node |
 | `examples/streaming` | Python generator via `STREAM_*` |
 | `examples/recovery` | Health / error surface on a native handler |
@@ -897,7 +898,7 @@ If you clone from GitHub or resolve the module through the public Go proxy, thos
 
 ### Doctor
 
-`centralizer doctor` inspects the host: Go toolchain, Python, Node, Cargo, OS sockets, shared-memory warning (experimental / disabled), cache directory writability, Git on `PATH`, protocol version parse, and registered adapter names. The report is local. It is not sent to the authors.
+`centralizer doctor` inspects the host: Go toolchain, Python, Node, Cargo, OS sockets, shared-memory warning (experimental / disabled), cache directory writability, Git on `PATH`, protocol version parse, registered adapter names, and a call-capable vs detect-only summary. The report is local. It is not sent to the authors.
 
 ### Telemetry
 
@@ -1043,6 +1044,10 @@ Do not treat later phases as implemented because files exist. See [ROADMAP.md](R
 | [CONTRIBUTING.md](CONTRIBUTING.md) | Development |
 | [SUPPORT.md](SUPPORT.md) | Issues and discussions |
 | [CODE_OF_CONDUCT.md](CODE_OF_CONDUCT.md) | Conduct |
+| [ACQUISITION.md](ACQUISITION.md) | Diligence-ready acquisition brief (no valuation) |
+| [docs/EVALUATOR_GUIDE.md](docs/EVALUATOR_GUIDE.md) | First-hour guide for acquirers / evaluators |
+| [docs/acquisition/](docs/acquisition/) | Acquisition data room |
+| [docs/acquisition/BUYER_DEMO.md](docs/acquisition/BUYER_DEMO.md) | Reproducible buyer demo (`explain` + Call) |
 | [docs/telemetry.md](docs/telemetry.md) | In-process metrics |
 | [docs/sdk.md](docs/sdk.md) | Adapter helpers |
 | [docs/github-metadata.md](docs/github-metadata.md) | Social preview and topics |

@@ -23,6 +23,7 @@ import (
 	"github.com/theworker02/centralizer/pkg/adapter"
 	"github.com/theworker02/centralizer/pkg/bridge"
 	"github.com/theworker02/centralizer/pkg/czerr"
+	czexplain "github.com/theworker02/centralizer/pkg/explain"
 	"github.com/theworker02/centralizer/pkg/health"
 	"github.com/theworker02/centralizer/pkg/lockfile"
 	"github.com/theworker02/centralizer/pkg/manifest"
@@ -273,31 +274,47 @@ func (h *Hub) Analyze(ctx context.Context, ref string) (*discovery.Result, error
 
 // Explain returns a human-readable planning report without connecting.
 func (h *Hub) Explain(ctx context.Context, ref string, opts ...Option) (string, *planner.Result, error) {
+	rep, err := h.ExplainReport(ctx, ref, opts...)
+	if err != nil {
+		return "", nil, err
+	}
+	return rep.Text(), rep.Plan, nil
+}
+
+// ExplainReport returns a structured evaluation report (detection score,
+// adapter, Call honesty, plan, next steps) without connecting.
+func (h *Hub) ExplainReport(ctx context.Context, ref string, opts ...Option) (*czexplain.Report, error) {
 	cfg := h.cfg
 	for _, o := range opts {
 		o(&cfg)
 	}
 	analysis, err := h.Analyze(ctx, ref)
 	if err != nil {
-		return "", nil, err
+		return nil, err
 	}
-	res, err := planner.Plan(planner.Input{
-		Language: analysis.Primary.Language,
-		Runtime:  analysis.Primary.Runtime,
-		Adapter:  analysis.Primary.Adapter,
-		Graph:    analysis.Graph,
-		Policy:   security.Engine{Policy: cfg.policy},
-		Prefer:   cfg.prefer,
-	})
-	if err != nil {
-		return "", nil, err
+	var plan *planner.Result
+	var plannerText string
+	if analysis.Primary.Adapter != "" {
+		res, planErr := planner.Plan(planner.Input{
+			Language: analysis.Primary.Language,
+			Runtime:  analysis.Primary.Runtime,
+			Adapter:  analysis.Primary.Adapter,
+			Graph:    analysis.Graph,
+			Policy:   security.Engine{Policy: cfg.policy},
+			Prefer:   cfg.prefer,
+		})
+		if planErr == nil {
+			plan = res
+			plannerText = planner.Explain(planner.Input{
+				Language: analysis.Primary.Language,
+				Runtime:  analysis.Primary.Runtime,
+				Graph:    analysis.Graph,
+			}, res)
+		}
+		// Detect-only adapters often have no viable Call plan; still report.
 	}
-	text := planner.Explain(planner.Input{
-		Language: analysis.Primary.Language,
-		Runtime:  analysis.Primary.Runtime,
-		Graph:    analysis.Graph,
-	}, res)
-	return text, res, nil
+	rep := czexplain.Build(ref, analysis, plan, h.AdapterCatalog(), plannerText)
+	return &rep, nil
 }
 
 // List returns connected services.
@@ -325,24 +342,25 @@ func (h *Hub) AdapterCatalog() []adapter.Info { return adapter.Catalog(h.reg) }
 
 // LockPlan snapshots the resolved plan without connecting.
 func (h *Hub) LockPlan(ctx context.Context, ref string, opts ...Option) (lockfile.File, error) {
-	_, plan, err := h.Explain(ctx, ref, opts...)
+	rep, err := h.ExplainReport(ctx, ref, opts...)
 	if err != nil {
 		return lockfile.File{}, err
 	}
-	analysis, err := h.Analyze(ctx, ref)
-	if err != nil {
-		return lockfile.File{}, err
+	if !rep.CallImplemented {
+		return lockfile.File{}, czerr.New(czerr.ErrNotImplemented,
+			"adapter "+rep.Adapter+" is detect-only; cannot lock a Call plan")
+	}
+	if rep.Plan == nil {
+		return lockfile.File{}, czerr.New(czerr.ErrPlannerFailed, "no viable bridge strategy to lock")
 	}
 	fp := ""
-	if analysis != nil {
-		fp = analysis.Fingerprint
-	}
 	lang, runtime := "", ""
-	if analysis != nil {
-		lang = analysis.Primary.Language
-		runtime = analysis.Primary.Runtime
+	if rep.Analysis != nil {
+		fp = rep.Analysis.Fingerprint
+		lang = rep.Analysis.Primary.Language
+		runtime = rep.Analysis.Primary.Runtime
 	}
-	return lockfile.FromPlan(ref, lang, runtime, fp, plan.Selected), nil
+	return lockfile.FromPlan(ref, lang, runtime, fp, rep.Plan.Selected), nil
 }
 
 // Cache returns the artifact cache.

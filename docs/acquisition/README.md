@@ -30,10 +30,15 @@ and does **not** assert that an acquisition has occurred.
 | [CHANGE_OF_CONTROL_CHECKLIST.md](./CHANGE_OF_CONTROL_CHECKLIST.md) | Dormant post-close checklist |
 | [BUYER_DUE_DILIGENCE_CHECKLIST.md](./BUYER_DUE_DILIGENCE_CHECKLIST.md) | Buyer checklist |
 | [DISCLOSURE_SCHEDULE.md](./DISCLOSURE_SCHEDULE.md) | Material disclosures |
-| [BUYER_DEMO.md](./BUYER_DEMO.md) | Reproducible demo |
+| [BUYER_DEMO.md](./BUYER_DEMO.md) | Reproducible demo (`explain` + Call + polyglot-hello) |
+| [TEASER.md](./TEASER.md) | One-page teaser |
+| [TARGET_ACQUIRERS.md](./TARGET_ACQUIRERS.md) | Prospect themes |
+| [OUTREACH.md](./OUTREACH.md) | Pitch framing + contact log |
 | [HANDOFF_PLAN.md](./HANDOFF_PLAN.md) | Day 0 → Day 30 |
 | [READINESS_REPORT.md](./READINESS_REPORT.md) | Gate statuses |
 | [CENTRALIZER_DILIGENCE.md](./CENTRALIZER_DILIGENCE.md) | Project-specific diligence |
+
+Evaluator first hour: [`../EVALUATOR_GUIDE.md`](../EVALUATOR_GUIDE.md).
 
 Root commercial docs: [`COMMERCIAL.md`](../../COMMERCIAL.md) (if present), [`ACQUISITION.md`](../../ACQUISITION.md) (if present), [`LICENSE_TRANSITION_NOTICE.md`](../../LICENSE_TRANSITION_NOTICE.md).
 

@@ -13,7 +13,7 @@ No copyleft in direct Go deps. Brand package under root LICENSE. Protocol is pro
 ## Copyleft
 
 No GPL/AGPL/LGPL **declared as core direct dependencies** in the audits performed.
-Optional GUI stacks (e.g. PySide6/Qt) may introduce LGPL obligations if redistributed — **REQUIRES_LEGAL_REVIEW** where applicable (OpenDashCAN/BotScope GUI extras).
+This repository’s core runtime is Go + language process adapters; it does not ship a Qt/PySide6 GUI. Website Node deps remain under their own licenses (see Summary).
 
 ## SBOM status
 

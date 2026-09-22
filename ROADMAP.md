@@ -10,6 +10,8 @@ This is a plan, not a claim of completed work. A feature is done when code, test
 - Go, Python, and Node adapters (invocation)
 - Rust adapter for protocol-speaking binaries
 - CLI and optional daemon skeleton
+- Evaluator-oriented `explain` (detect score, Call honesty, next steps)
+- `examples/polyglot-hello` for first-hour buyer demos
 
 ## Phase 2
 
