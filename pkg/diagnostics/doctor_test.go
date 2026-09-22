@@ -1,6 +1,11 @@
 package diagnostics
 
-import "testing"
+import (
+	"strings"
+	"testing"
+
+	"github.com/theworker02/centralizer/pkg/adapter"
+)
 
 func TestRunIncludesCoreChecks(t *testing.T) {
 	rep := Run([]string{"python", "go"})
@@ -26,5 +31,23 @@ func TestRunIncludesCoreChecks(t *testing.T) {
 	}
 	if rep.Text() == "" {
 		t.Fatal("empty text")
+	}
+}
+
+func TestRunCatalogSeparatesCallAndDetect(t *testing.T) {
+	cat := []adapter.Info{
+		{Name: "python", Invocation: true},
+		{Name: "lua", Invocation: false},
+	}
+	rep := RunCatalog([]string{"python", "lua"}, cat)
+	if len(rep.CallCapable) != 1 || rep.CallCapable[0] != "python" {
+		t.Fatalf("call=%v", rep.CallCapable)
+	}
+	if len(rep.DetectOnly) != 1 || rep.DetectOnly[0] != "lua" {
+		t.Fatalf("detect=%v", rep.DetectOnly)
+	}
+	text := rep.Text()
+	if !strings.Contains(text, "call-capable") || !strings.Contains(text, "detect-only") {
+		t.Fatalf("text:\n%s", text)
 	}
 }

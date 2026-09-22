@@ -4,6 +4,17 @@ All notable changes are documented here. The format follows [Keep a Changelog](h
 
 ## [Unreleased]
 
+### Added
+
+- `centralizer explain` evaluation report: detection score, chosen adapter, Call implemented (catalog honesty), bridge plan, and next steps (`pkg/explain`, `Hub.ExplainReport`)
+- `centralizer doctor` summarizes call-capable vs detect-only adapters
+- `examples/polyglot-hello` — Go host explains and calls Python + Node (no Rust required)
+- Diligence packaging: expanded [ACQUISITION.md](ACQUISITION.md), [docs/EVALUATOR_GUIDE.md](docs/EVALUATOR_GUIDE.md), richer [docs/acquisition/BUYER_DEMO.md](docs/acquisition/BUYER_DEMO.md)
+
+### Changed
+
+- `Hub.Explain` text is the evaluator report (planner detail retained in a trailing section)
+
 ## [0.1.2] - 2026-08-15
 
 ### Added

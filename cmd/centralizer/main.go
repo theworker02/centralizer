@@ -123,7 +123,7 @@ Commands:
   health     show bridge health
   list       list adapters and (when connected) services
   graph      print the capability graph
-  explain    explain bridge selection
+  explain    detection score, adapter, Call honesty, plan, next steps
   bench      measure available strategies (does not override policy)
   trace      record discovery → plan → connect spans
   doctor     inspect host runtimes and permissions
@@ -340,11 +340,11 @@ func cmdExplain(ctx context.Context, g global, rest []string) error {
 		return err
 	}
 	hub := centralizer.New()
-	text, plan, err := hub.Explain(ctx, ref)
+	rep, err := hub.ExplainReport(ctx, ref)
 	if err != nil {
 		return err
 	}
-	return emit(g, plan, text)
+	return emit(g, rep, rep.Text())
 }
 
 func cmdBench(ctx context.Context, g global, rest []string) error {
@@ -356,6 +356,9 @@ func cmdBench(ctx context.Context, g global, rest []string) error {
 	_, plan, err := hub.Explain(ctx, ref)
 	if err != nil {
 		return err
+	}
+	if plan == nil {
+		return fmt.Errorf("no viable bridge strategy for %s", ref)
 	}
 	var b strings.Builder
 	b.WriteString("Testing available bridge strategies...\n")
@@ -402,7 +405,7 @@ func cmdTrace(ctx context.Context, g global, rest []string) error {
 
 func cmdDoctor(g global) error {
 	hub := centralizer.New()
-	rep := diagnostics.Run(hub.Adapters())
+	rep := diagnostics.RunCatalog(hub.Adapters(), hub.AdapterCatalog())
 	return emit(g, rep, rep.Text())
 }
 

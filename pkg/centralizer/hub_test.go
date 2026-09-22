@@ -5,6 +5,7 @@ import (
 	"errors"
 	"os"
 	"path/filepath"
+	"strings"
 	"testing"
 	"time"
 
@@ -142,5 +143,49 @@ func TestHandleExpiryAndDrop(t *testing.T) {
 	}
 	if err := svc.Close(ctx); err != nil {
 		t.Fatal(err)
+	}
+}
+
+func TestExplainReportPython(t *testing.T) {
+	root := filepath.Join("..", "..", "examples", "go-python", "analytics")
+	if _, err := os.Stat(root); err != nil {
+		t.Skip("example missing")
+	}
+	hub := New()
+	rep, err := hub.ExplainReport(context.Background(), root)
+	if err != nil {
+		t.Fatal(err)
+	}
+	if rep.Adapter != "python" || !rep.CallImplemented {
+		t.Fatalf("%+v", rep)
+	}
+	if rep.DetectionScore < 0.5 {
+		t.Fatalf("score=%f", rep.DetectionScore)
+	}
+	text := rep.Text()
+	if !strings.Contains(text, "Call implemented: yes") {
+		t.Fatalf("text:\n%s", text)
+	}
+}
+
+func TestExplainReportDetectOnlyLua(t *testing.T) {
+	dir := t.TempDir()
+	path := filepath.Join(dir, "hello.lua")
+	if err := os.WriteFile(path, []byte("print('hi')\n"), 0o600); err != nil {
+		t.Fatal(err)
+	}
+	hub := New()
+	rep, err := hub.ExplainReport(context.Background(), path)
+	if err != nil {
+		t.Fatal(err)
+	}
+	if rep.Adapter != "lua" {
+		t.Fatalf("adapter=%s", rep.Adapter)
+	}
+	if rep.CallImplemented {
+		t.Fatal("lua must remain detect-only")
+	}
+	if !strings.Contains(rep.Text(), "detect-only") {
+		t.Fatalf("text:\n%s", rep.Text())
 	}
 }
