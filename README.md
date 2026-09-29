@@ -1051,3 +1051,16 @@ Do not treat later phases as implemented because files exist. See [ROADMAP.md](R
 | [docs/telemetry.md](docs/telemetry.md) | In-process metrics |
 | [docs/sdk.md](docs/sdk.md) | Adapter helpers |
 | [docs/github-metadata.md](docs/github-metadata.md) | Social preview and topics |
+
+## Badges & release notes
+
+| Badge | Meaning |
+| --- | --- |
+| docs live | Public documentation / Pages surface for `centralizer` |
+| release v1.0.0 | Stable tagged release with narrative notes |
+| license | See repository `LICENSE` for terms |
+| status maintained | Actively kept in the @theworker02 portfolio |
+| version 1.0.0 | Documentation and brand completeness milestone |
+| pages enabled | Site intended at `https://theworker02.github.io/centralizer/` |
+
+Detailed narrative for the stable line lives in [CHANGELOG.md](./CHANGELOG.md) and the [v1.0.0 GitHub Release](https://github.com/theworker02/centralizer/releases/tag/v1.0.0).
